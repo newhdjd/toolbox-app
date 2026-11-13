@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 启动页主题，跟网站主色调一致 -->
+    <style name="Theme.Toolbox" parent="@android:style/Theme.Light.NoTitleBar.Fullscreen">
+        <item name="android:windowBackground">#4f46e5</item>
+        <item name="android:statusBarColor">#4f46e5</item>
+    </style>
+</resources>

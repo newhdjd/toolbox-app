@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>工具箱 · Toolbox</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="app">
+  <header class="header">
+    <div class="logo">
+      <span class="logo-icon">🧰</span>
+      <div>
+        <h1>工具箱</h1>
+        <p class="subtitle">在线实用小工具集合</p>
+      </div>
+    </div>
+    <button class="refresh-btn" id="refreshBtn" title="刷新页面">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+    </button>
+  </header>
+
+  <nav class="tabs" id="tabs">
+    <button class="tab active" data-tab="color">🎨 颜色</button>
+    <button class="tab" data-tab="convert">📐 换算</button>
+    <button class="tab" data-tab="text">📝 文本</button>
+    <button class="tab" data-tab="password">🔐 密码</button>
+    <button class="tab" data-tab="timer">⏱️ 计时</button>
+    <button class="tab" data-tab="bmi">⚖️ BMI</button>
+    <button class="tab" data-tab="calc">🧮 计算器</button>
+    <button class="tab" data-tab="base">🔢 进制转换</button>
+  </nav>
+
+  <main class="content">
+
+    <!-- 颜色工具 -->
+    <section class="panel active" id="color">
+      <h2>颜色工具</h2>
+      <div class="color-picker">
+        <label>选择颜色</label>
+        <input type="color" id="colorInput" value="#4f46e5" />
+      </div>
+      <div class="color-display" id="colorDisplay">
+        <div class="swatch" id="swatch"></div>
+        <div class="color-values">
+          <div class="value-row">
+            <span class="label">HEX</span>
+            <span class="value" id="hexVal">#4F46E5</span>
+            <button class="copy-btn" data-copy="hexVal">复制</button>
+          </div>
+          <div class="value-row">
+            <span class="label">RGB</span>
+            <span class="value" id="rgbVal">rgb(79, 70, 229)</span>
+            <button class="copy-btn" data-copy="rgbVal">复制</button>
+          </div>
+          <div class="value-row">
+            <span class="label">HSL</span>
+            <span class="value" id="hslVal">hsl(244, 75%, 59%)</span>
+            <button class="copy-btn" data-copy="hslVal">复制</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 单位换算 -->
+    <section class="panel" id="convert">
+      <h2>单位换算</h2>
+      <div class="convert-box">
+        <div class="row">
+          <label>数值</label>
+          <input type="number" id="convertVal" value="1" />
+        </div>
+        <div class="row">
+          <label>类型</label>
+          <select id="convertType">
+            <option value="length">长度</option>
+            <option value="weight">重量</option>
+            <option value="temperature">温度</option>
+            <option value="data">数据</option>
+          </select>
+        </div>
+        <div class="row two-col">
+          <div>
+            <label>从</label>
+            <select id="convertFrom"></select>
+          </div>
+          <div>
+            <label>到</label>
+            <select id="convertTo"></select>
+          </div>
+        </div>
+        <div class="result-box">
+          <span class="result-label">结果</span>
+          <span class="result-value" id="convertResult">—</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 文本工具 -->
+    <section class="panel" id="text">
+      <h2>文本工具</h2>
+      <textarea id="textInput" placeholder="在此输入文本..." rows="8"></textarea>
+      <div class="stats">
+        <div class="stat"><span class="num" id="charCount">0</span><span class="label">字符</span></div>
+        <div class="stat"><span class="num" id="wordCount">0</span><span class="label">单词</span></div>
+        <div class="stat"><span class="num" id="lineCount">0</span><span class="label">行数</span></div>
+        <div class="stat"><span class="num" id="byteCount">0</span><span class="label">字节</span></div>
+      </div>
+      <div class="btn-row">
+        <button class="btn" data-action="upper">转大写</button>
+        <button class="btn" data-action="lower">转小写</button>
+        <button class="btn" data-action="reverse">反转</button>
+        <button class="btn" data-action="trim">去空格</button>
+        <button class="btn" data-action="copy">复制</button>
+        <button class="btn danger" data-action="clear">清空</button>
+      </div>
+    </section>
+
+    <!-- 密码生成 -->
+    <section class="panel" id="password">
+      <h2>密码生成器</h2>
+      <div class="pw-box">
+        <input type="text" id="pwOutput" readonly />
+        <button class="btn primary" id="pwCopy">复制</button>
+      </div>
+      <div class="row">
+        <label>长度: <span id="pwLenVal">16</span></label>
+        <input type="range" id="pwLen" min="4" max="64" value="16" />
+      </div>
+      <div class="checks">
+        <label><input type="checkbox" id="pwLower" checked /> 小写字母</label>
+        <label><input type="checkbox" id="pwUpper" checked /> 大写字母</label>
+        <label><input type="checkbox" id="pwNum" checked /> 数字</label>
+        <label><input type="checkbox" id="pwSym" /> 符号</label>
+      </div>
+      <button class="btn primary full" id="pwGen">生成密码</button>
+    </section>
+
+    <!-- 计时器 -->
+    <section class="panel" id="timer">
+      <h2>倒计时</h2>
+      <div class="timer-display" id="timerDisplay">00:00:00</div>
+      <div class="row two-col">
+        <div>
+          <label>分钟</label>
+          <input type="number" id="timerMin" value="5" min="0" />
+        </div>
+        <div>
+          <label>秒</label>
+          <input type="number" id="timerSec" value="0" min="0" max="59" />
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn primary" id="timerStart">开始</button>
+        <button class="btn" id="timerPause">暂停</button>
+        <button class="btn danger" id="timerReset">重置</button>
+      </div>
+    </section>
+
+    <!-- BMI -->
+    <section class="panel" id="bmi">
+      <h2>BMI 计算</h2>
+      <div class="row">
+        <label>身高 (cm)</label>
+        <input type="number" id="bmiHeight" placeholder="例如 170" />
+      </div>
+      <div class="row">
+        <label>体重 (kg)</label>
+        <input type="number" id="bmiWeight" placeholder="例如 65" />
+      </div>
+      <button class="btn primary full" id="bmiCalc">计算 BMI</button>
+      <div class="result-box">
+        <span class="result-label">你的 BMI</span>
+        <span class="result-value" id="bmiResult">—</span>
+      </div>
+      <p class="hint" id="bmiHint"></p>
+    </section>
+
+    <!-- 计算器 -->
+    <section class="panel" id="calc">
+      <h2>计算器</h2>
+      <div class="calc-box">
+        <input type="text" id="calcInput" placeholder="输入表达式，如 2+3*4" />
+        <div class="calc-result">
+          <span class="result-label">实时结果</span>
+          <span class="result-value" id="calcResult">—</span>
+        </div>
+        <div class="calc-buttons">
+          <button class="calc-btn" data-val="7">7</button>
+          <button class="calc-btn" data-val="8">8</button>
+          <button class="calc-btn" data-val="9">9</button>
+          <button class="calc-btn op" data-val="/">÷</button>
+          <button class="calc-btn" data-val="4">4</button>
+          <button class="calc-btn" data-val="5">5</button>
+          <button class="calc-btn" data-val="6">6</button>
+          <button class="calc-btn op" data-val="*">×</button>
+          <button class="calc-btn" data-val="1">1</button>
+          <button class="calc-btn" data-val="2">2</button>
+          <button class="calc-btn" data-val="3">3</button>
+          <button class="calc-btn op" data-val="-">−</button>
+          <button class="calc-btn" data-val="0">0</button>
+          <button class="calc-btn" data-val=".">.</button>
+          <button class="calc-btn op" data-val="(">(</button>
+          <button class="calc-btn op" data-val="+">+</button>
+        </div>
+        <div class="btn-row">
+          <button class="btn" id="calcBksp">退格</button>
+          <button class="btn danger" id="calcClear">清空</button>
+          <button class="btn primary" id="calcCopy">复制结果</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 进制转换 -->
+    <section class="panel" id="base">
+      <h2>进制转换</h2>
+      <div class="row">
+        <label>输入数值</label>
+        <input type="text" id="baseInput" placeholder="例如 FF 或 1010" />
+      </div>
+      <div class="row">
+        <label>源进制</label>
+        <select id="baseFrom">
+          <option value="2">二进制 (Binary)</option>
+          <option value="8">八进制 (Octal)</option>
+          <option value="10" selected>十进制 (Decimal)</option>
+          <option value="16">十六进制 (Hex)</option>
+        </select>
+      </div>
+      <div class="base-results" id="baseResults">
+        <div class="base-row">
+          <span class="base-label">二进制</span>
+          <span class="base-value" id="base2">—</span>
+          <button class="copy-btn" data-copy="base2">复制</button>
+        </div>
+        <div class="base-row">
+          <span class="base-label">八进制</span>
+          <span class="base-value" id="base8">—</span>
+          <button class="copy-btn" data-copy="base8">复制</button>
+        </div>
+        <div class="base-row">
+          <span class="base-label">十进制</span>
+          <span class="base-value" id="base10">—</span>
+          <button class="copy-btn" data-copy="base10">复制</button>
+        </div>
+        <div class="base-row">
+          <span class="base-label">十六进制</span>
+          <span class="base-value" id="base16">—</span>
+          <button class="copy-btn" data-copy="base16">复制</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 工具箱 · 纯前端实现，数据不上传</p>
+  </footer>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
