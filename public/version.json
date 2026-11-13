@@ -1,8 +1,8 @@
-{
-  "version_code": 1,
-  "version_name": "1.0",
-  "title": "工具箱 v1.0",
-  "desc": "首次发布",
-  "apk_url": "https://37jamnj6ip4n3i2dq5k.traesite.cn/releases/toolbox.apk",
+﻿{
+  "version_code": 2,
+  "version_name": "1.1",
+  "title": "工具箱 v1.1",
+  "desc": "新增：自动更新功能\n优化：真正全屏沉浸，顶部黑色问题修复\n优化：去掉按钮点击蓝色反馈",
+  "apk_url": "https://github.com/newhdjd/toolbox-app/releases/download/v1.1/toolbox.apk",
   "force": false
 }
